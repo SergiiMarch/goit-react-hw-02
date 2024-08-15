@@ -3,6 +3,7 @@ import Options from "./components/Options/Options";
 import Description from "./components/Description/Description";
 import Feedback from "./components/Feedback/Feedback";
 import "./App.css";
+import Notification from "./components/Notification/Notification";
 
 function App() {
   const [state, setState] = useState({
@@ -18,6 +19,9 @@ function App() {
       [feedbackType]: state[feedbackType] + 1,
     }));
   };
+
+  const totalFeedback = good + neutral + bad;
+
   return (
     <>
       <Description />
@@ -26,7 +30,12 @@ function App() {
         onNeutralClick={() => updateFeedback("neutral")}
         onBadClick={() => updateFeedback("bad")}
       />
-      <Feedback good={good} neutral={neutral} bad={bad} />
+
+      {totalFeedback !== 0 ? (
+        <Feedback good={good} neutral={neutral} bad={bad} />
+      ) : (
+        <Notification message="No feedback given yet" />
+      )}
     </>
   );
 }
