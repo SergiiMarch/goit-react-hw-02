@@ -12,16 +12,19 @@ function App() {
   });
   const { good, neutral, bad } = state;
 
-  const handleGoodClick = () => setState({ ...state, good: good + 1 });
-  const handleNeutralClick = () => setState({ ...state, neutral: neutral + 1 });
-  const handleBadClick = () => setState({ ...state, bad: bad + 1 });
+  const updateFeedback = (feedbackType) => {
+    setState((state) => ({
+      ...state,
+      [feedbackType]: state[feedbackType] + 1,
+    }));
+  };
   return (
     <>
       <Description />
       <Options
-        onGoodClick={handleGoodClick}
-        onNeutralClick={handleNeutralClick}
-        onBadClick={handleBadClick}
+        onGoodClick={() => updateFeedback("good")}
+        onNeutralClick={() => updateFeedback("neutral")}
+        onBadClick={() => updateFeedback("bad")}
       />
       <Feedback good={good} neutral={neutral} bad={bad} />
     </>
