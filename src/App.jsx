@@ -10,7 +10,7 @@ function App() {
   const [state, setState] = useState(() => {
     const savedState = window.localStorage.getItem("my-state");
 
-    return savedState
+    return savedState !== null
       ? JSON.parse(savedState)
       : {
           good: 0,
